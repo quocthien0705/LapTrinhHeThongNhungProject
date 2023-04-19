@@ -382,17 +382,6 @@ input[type="range"]:active::-webkit-slider-thumb{
       }       
     }
 
-    function myfunction5(){
-      var checkBox = document.getElementById("myCheck5");
-      if (checkBox.checked == true){
-        xhttp1.open("POST", "/switch5", true);
-        xhttp1.send("1");
-      }
-      else{
-        xhttp1.open("POST", "/switch5", true);
-        xhttp1.send("0");        
-      }       
-    }
     xhttp1.onreadystatechange = function() {
       const obj =JSON.parse( this.responseText);
       var element1 = document.getElementById('t1');
