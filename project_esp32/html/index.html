@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedded System Programming - Group 2</title>
+    <link rel="shortcut icon" type="image/png" href="logorm.png"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: #dfe6e9;
+        font-family:Helvetica;
+        margin: 0px;
+        padding: 0px;
+      }
+      h1 {
+        background-color: #636e72;
+        padding: 15px ;
+        color: white;
+        margin: auto;
+        
+      }
+
+      #sun {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        -webkit-transition: transform 0.4s;
+        transition: transform 0.4s;
+      }
+      .switch {
+        display: inline-block;
+        position: relative;
+        width: 60px;
+        height: 34px;
+        margin: -5px;
+      }
+
+      .switch input {
+        display: none;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 34px;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+      .cloud {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        -webkit-transition: transform 0.4s;
+        transition: transform 0.4s;
+      }
+      .box {
+        width: 300px;
+        height: 250px;
+        background-color: #0984e3;
+        border-radius: 20px;
+        border: 5px solid #132d65;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        font-size: 24px;
+        color: #fff;
+        text-align: left;
+        padding: 10px;
+      }
+      input:checked + .slider {
+        background-color: #0984e3;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #0984e3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+      #align1{
+        position: absolute;
+        top:100px;
+        left:100px;
+      }
+      #align2{
+        position: absolute;
+        top:100px;
+        left:230px;
+      }
+      #align31{
+        position: absolute;
+        top:250px;
+        left:550px;
+      }
+      #align32{
+        position: absolute;
+        top:200px;
+        left:680px;
+      }
+      #align33{
+        position: absolute;
+        top:200px;
+        left:900px;
+      }
+      #align34{
+        position: absolute;
+        top:300px;
+        left:700px;
+      }
+      #align35{
+        position: absolute;
+        top:300px;
+        left:960px;
+      }
+      #align4{
+        position: absolute;
+        top:350px;
+        left:70px;
+      }
+      #align5{
+        position: absolute;
+        top:110px;
+        left:215px;
+      }
+      
+      #align6{
+              position: absolute;
+              top:500px;
+              left:850px;
+      }
+
+      hr{
+      width: 2px;
+      height: 150px;
+      background-color: black;
+      border-color: black;
+      border-radius: 15px;
+      }
+      .card { font-size:2 0px ; box-shadow: 0 rgba(255, 255, 255, 0.5); }
+
+      .container{
+    background-color: #ffffff;
+    width: 90vmin;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px 20px;
+    border-radius: 5px;
+}
+input[type="range"]{
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    width: 80%;
+    height: 8px;
+    background-color: #d5d5d5;
+    border-radius: 8px;
+    outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    height: 8px;
+}
+input[type="range"]::-moz-track{
+    -moz-appearance: none;
+    height: 8px;
+}
+input[type="range"]::-ms-track{
+    appearance: none;
+    height: 8px;
+}
+input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background-color: #0984e3;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    border: none;
+}
+
+input[type="range"]::-ms-thumb{
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    background-color: #0984e3;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    border: none;
+}
+input[type="range"]:active::-webkit-slider-thumb{
+    background-color: #ffffff;
+    border: 3px solid #0984e3;
+}
+#slider-value{
+    width: 13%;
+    position: relative;
+    background-color: #0984e3;
+    color: #ffffff;
+    text-align: center;
+    font-family: "Roboto Mono",monospace;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.d-flex{
+  display: flex;
+}
+.justify-content-between{
+  justify-content: space-between;
+}
+.align-items-center{
+  align-items: center;
+}
+
+#header{
+  background: #132d65;
+  padding: 15px 0px;
+}
+#header #logo{
+  color: #fff;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+    </style>
+
+    <div id="header">
+        <div class="container2 d-flex justify-content-between align-items-center">
+        <a href="" id="logo">Embedded System Programming - Group 2</a>
+        <div class="logotruong">
+          <a class="logobk" href="https://hcmut.edu.vn/" style="text-decoration: none;vertical-align: middle;">
+            <img src="logorm.png" style="height: 60px; margin-right: 6px; position:fixed ; right: 290px; top: 2px;">
+          <div class="title-truong" style="margin-right: 20px;">
+            <div class="title-faculity" style="white-space: nowrap; color:#fff;font-size: 12px; text-align: left; display: block;">ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH
+            </div>
+            <div class="title-school" style="white-space: nowrap;color:#fff;font-size: 16px; text-align: left;  display: block;">TRƯỜNG ĐẠI HỌC BÁCH KHOA
+            </div>
+          </div>
+        </a>
+        </div>
+        </div>
+    </div>
+    <h2 id="align1">
+      Trời nắng<br />
+      <img id="sun" src="white.svg" alt="Sun" />
+    </h2>
+    <h2 id="align2">
+      Trời mưa<br />
+      <img id="cloud" class="cloud" src="cloud1.svg" />
+    </h2>
+    <hr id="align5">
+
+    <h2 id="align32">
+      Che mưa&nbsp
+      <label class="switch">
+        <input type="checkbox" checked id="myCheck3" onclick="myfunction3()">
+        <span class="slider"></span>
+      </label>
+      
+    </h2>
+    <h2 id="align33">
+      Phun sương&nbsp
+      <label class="switch">
+        <input type="checkbox" checked id="myCheck4" onclick="myfunction4()">
+        <span class="slider"></span>
+      </label>
+      
+    </h2>
+    <h2 id="align34">
+      Bật đèn&nbsp
+      <label class="switch">
+        <input type="checkbox" checked id="myCheck2" onclick="myfunction2()">
+        <span class="slider"></span>
+      </label>
+      
+    </h2>
+    <h2 id="align35">
+      Cho ăn&nbsp
+      <label class="switch" id="switch1">
+        <input type="checkbox" checked id="myCheck1" onclick="myfunction1()">
+        <span class="slider"></span>
+      </label>
+      
+    </h2>
+    <div  id="align4" class="box">
+      <div class="cards">
+        <div class="card temperature">
+          <p class="card-title"> TEMPERATURE <span id="t1"></span> &deg;C</span> <span id="rt1"> </span></p> </p>
+        </div>
+        <div class="card humidity">  
+          <p class="card-title"> HUMIDITY <span id="h1"></span> &percnt;</span> <span id="rH1"> </span></p> </p>
+        </div>
+      </div>
+    </div>
+        <h2>
+          <label class="container"  id="align6">
+           <p>Phun&nbsp<br>sương&nbsp</p>
+      <input type="range" id="my-slider" min="0" max="100" value="50" oninput="slider()">
+      <div id="slider-value">0</div>
+          </lable>
+        </h2>
+ 
+  </body>
+  <script>
+    
+    var xhttp1 = new XMLHttpRequest();
+    function myfunction1(){
+      var checkBox = document.getElementById("myCheck1");
+      if (checkBox.checked == true){
+        xhttp1.open("POST", "/switch1", true);
+        xhttp1.send("1");
+      }
+      else{
+        xhttp1.open("POST", "/switch1", true);
+        xhttp1.send("0");        
+      }       
+    }
+    function myfunction2(){
+      var checkBox = document.getElementById("myCheck2");
+      if (checkBox.checked == true){
+        xhttp1.open("POST", "/switch2", true);
+        xhttp1.send("1");
+      }
+      else{
+        xhttp1.open("POST", "/switch2", true);
+        xhttp1.send("0");        
+      }       
+    }
+    function myfunction3(){
+      var checkBox = document.getElementById("myCheck3");
+      if (checkBox.checked == true){
+        xhttp1.open("POST", "/switch3", true);
+        xhttp1.send("1");
+      }
+      else{
+        xhttp1.open("POST", "/switch3", true);
+        xhttp1.send("0");        
+      }       
+    }
+    function myfunction4(){
+      var checkBox = document.getElementById("myCheck4");
+      if (checkBox.checked == true){
+        xhttp1.open("POST", "/switch4", true);
+        xhttp1.send("1");
+      }
+      else{
+        xhttp1.open("POST", "/switch4", true);
+        xhttp1.send("0");        
+      }       
+    }
+    xhttp1.onreadystatechange = function() {
+      const obj =JSON.parse( this.responseText);
+      var element1 = document.getElementById('t1');
+      element1.innerText = obj.temperature;
+      var element2 = document.getElementById('h1');
+      element2.innerText = obj.humidity; 
+      var cloud = document.getElementById("cloud");
+      const sun = document.querySelector("#sun");
+      let isNight = false;
+      if (obj.rain === "0") {
+      sun.setAttribute("src", "white.svg");
+      sun.style.transform = "rotate(180deg)";
+      cloud.setAttribute("src", "cloud2.svg")
+      isNight = true;
+    } else {
+      sun.setAttribute("src", "black.svg");
+      sun.style.transform = "rotate(0deg)";
+      cloud.setAttribute("src", "cloud1.svg");
+      isNight = false;
+    }
+    }
+    
+    setInterval(function() {
+      xhttp1.open("GET", "/dht11", true);
+      xhttp1.send();
+    }, 1000 );
+    
+
+
+
+const mySlider = document.getElementById("my-slider");
+const sliderValue = document.getElementById("slider-value");
+function slider(){
+    valPercent = (mySlider.value / mySlider.max)*100;
+    mySlider.style.background = `linear-gradient(to right, #0984e3 ${valPercent}%, #d5d5d5 ${valPercent}%)`;
+    sliderValue.textContent = mySlider.value;
+    xhttp1.open("POST", "/servo",true);
+    xhttp1.send(mySlider.value);
+}
+slider();
+  </script>
+</html>
+  
